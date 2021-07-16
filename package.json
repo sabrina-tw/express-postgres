@@ -16,9 +16,13 @@
     "pg": "^8.6.0"
   },
   "devDependencies": {
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "jest": "^27.0.6",
     "nodemon": "^2.0.12",
     "pg-mem": "^1.9.11",
+    "prettier": "^2.3.2",
     "supertest": "^6.1.3"
   }
 }
