@@ -6,7 +6,10 @@ Packages used:
 - [pg (node-postgres)](https://www.npmjs.com/package/pg)
 
 Packages to potentially look into:
-- [Sequelize](https://sequelize.org/) (See: https://blog.logrocket.com/why-you-should-avoid-orms-with-examples-in-node-js-e0baab73fa5/)
+- [Sequelize](https://sequelize.org/) ORM
+- [knex](https://github.com/knex/knex) query builder
+
+See: https://blog.logrocket.com/why-you-should-avoid-orms-with-examples-in-node-js-e0baab73fa5/
 
 ## Installation
 
