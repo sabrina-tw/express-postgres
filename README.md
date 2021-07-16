@@ -47,12 +47,12 @@ users.route.js (implementing this in routes for simplicity - best to extract the
 ```
 const express = require("express");
 const router = express.Router();
-const pool = require("./db"); <---
+const pool = require("./db"); 
 
 router.get("/", async (req, res) => {
   try {
-    let users = await pool.query("SELECT * FROM users"); <---
-    res.status(200).json(users.rows); <---
+    let users = await pool.query("SELECT * FROM users"); 
+    res.status(200).json(users.rows); 
   } catch (err) {
     res.status(500);
   }
@@ -64,7 +64,7 @@ router.get("/:id", async (req, res) => {
     const user = await pool.query(
       "SELECT * FROM users WHERE id = $1",
       [id]
-    ); <---
+    ); 
     res.status(200).json(user.rows[0]);
   } catch (err) {
     res.status(500);
@@ -73,3 +73,54 @@ router.get("/:id", async (req, res) => {
 
 module.exports = router;
 ```
+
+`npm start`
+
+# Testing
+
+## Installation
+
+Packages used:
+- [pg-mem](https://www.npmjs.com/package/pg-mem)
+- jest
+- supertest
+
+```
+npm i pg-mem jest supertest -D 
+```
+
+## Usage
+
+Implementation can be further refined? Can also explore other alternatives to `pg-mem`.
+
+users.route.test.js
+```
+const { newDb } = require("pg-mem");
+const { Pool: MockPool } = newDb().adapters.createPg();
+const mockPool = new MockPool();
+
+jest.mock("./db", () => {
+  return {
+    query: jest.fn().mockImplementation((...args) => {
+      return mockPool.query(...args);
+    })
+  }; 
+});
+
+describe("users", () => {
+  beforeAll(async () => {
+    await mockPool.query(
+      "CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, name TEXT(255))"
+    ); 
+    await mockPool.query(
+      "INSERT INTO users (name) VALUES ('Sabrina')"
+    ); 
+  });
+
+  afterAll(async () => {
+    await mockPool.query("DROP TABLE IF EXISTS users");
+  });
+});
+```
+
+`npm run test`
