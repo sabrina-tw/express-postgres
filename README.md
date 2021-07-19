@@ -3,9 +3,11 @@
 Playground to set up Postgres in Express.
 
 Packages used:
+
 - [pg (node-postgres)](https://www.npmjs.com/package/pg)
 
 Packages to potentially look into:
+
 - [Sequelize](https://sequelize.org/) ORM
 - [knex](https://github.com/knex/knex) query builder
 
@@ -21,6 +23,7 @@ npm i nodemon -D
 ## Configuration
 
 db.js
+
 ```
 const { Pool } = require("pg");
 
@@ -36,6 +39,7 @@ module.exports = pool;
 ```
 
 .env
+
 ```
 DB_NAME=xxx
 DB_HOST=localhost
@@ -47,15 +51,16 @@ DB_PORT=5432
 ## Usage
 
 users.route.js (implementing this in routes for simplicity - best to extract the actual querying into a users.controller.js)
+
 ```
 const express = require("express");
 const router = express.Router();
-const pool = require("./db"); 
+const pool = require("./db");
 
 router.get("/", async (req, res) => {
   try {
-    let users = await pool.query("SELECT * FROM users"); 
-    res.status(200).json(users.rows); 
+    let users = await pool.query("SELECT * FROM users");
+    res.status(200).json(users.rows);
   } catch (err) {
     res.status(500);
   }
@@ -67,7 +72,7 @@ router.get("/:id", async (req, res) => {
     const user = await pool.query(
       "SELECT * FROM users WHERE id = $1",
       [id]
-    ); 
+    );
     res.status(200).json(user.rows[0]);
   } catch (err) {
     res.status(500);
@@ -79,17 +84,58 @@ module.exports = router;
 
 `npm start`
 
+### [WIP] Authentication
+
+From: https://gist.github.com/laurenfazah/f9343ae8577999d301334fc68179b485
+
+```
+npm i bcrypt knex
+npm i -g knex
+```
+
+```
+// knexfile.js
+exports.up = function (knex, Promise) {
+  let createQuery = `CREATE TABLE users(
+    id SERIAL PRIMARY KEY NOT NULL,
+    username TEXT,
+    token TEXT,
+    password_digest TEXT,
+    created_at TIMESTAMP
+  )`;
+  return knex.raw(createQuery);
+};
+
+exports.down = function (knex, Promise) {
+  let dropQuery = `DROP TABLE users`;
+  return knex.raw(dropQuery);
+};
+```
+
+Create migration file
+
+`knex migrate:make create-users-table`
+
+Migrate
+
+```
+knex migrate:latest
+```
+
+TODO: set up User model
+
 # Testing
 
 ## Installation
 
 Packages used:
+
 - [pg-mem](https://www.npmjs.com/package/pg-mem)
 - jest
 - supertest
 
 ```
-npm i pg-mem jest supertest -D 
+npm i pg-mem jest supertest -D
 ```
 
 ## Usage
@@ -97,6 +143,7 @@ npm i pg-mem jest supertest -D
 Implementation can be further refined? Can also explore other alternatives to `pg-mem`.
 
 users.route.test.js
+
 ```
 const { newDb } = require("pg-mem");
 const { Pool: MockPool } = newDb().adapters.createPg();
@@ -107,17 +154,17 @@ jest.mock("./db", () => {
     query: jest.fn().mockImplementation((...args) => {
       return mockPool.query(...args);
     })
-  }; 
+  };
 });
 
 describe("users", () => {
   beforeAll(async () => {
     await mockPool.query(
       "CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, name TEXT(255))"
-    ); 
+    );
     await mockPool.query(
       "INSERT INTO users (name) VALUES ('Sabrina')"
-    ); 
+    );
   });
 
   afterAll(async () => {
