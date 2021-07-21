@@ -1,11 +1,11 @@
-const app = require("./app");
+const app = require("../app");
 const request = require("supertest");
 
 const { newDb } = require("pg-mem");
 const { Pool: MockPool } = newDb().adapters.createPg();
 const mockPool = new MockPool();
 
-jest.mock("./db", () => {
+jest.mock("../db", () => {
   return {
     query: jest.fn().mockImplementation((...args) => {
       return mockPool.query(...args);

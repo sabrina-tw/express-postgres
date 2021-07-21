@@ -55,7 +55,7 @@ users.route.js (implementing this in routes for simplicity - best to extract the
 ```
 const express = require("express");
 const router = express.Router();
-const pool = require("./db");
+const pool = require("../db");
 
 router.get("/", async (req, res) => {
   try {
@@ -149,7 +149,7 @@ const { newDb } = require("pg-mem");
 const { Pool: MockPool } = newDb().adapters.createPg();
 const mockPool = new MockPool();
 
-jest.mock("./db", () => {
+jest.mock("../db", () => {
   return {
     query: jest.fn().mockImplementation((...args) => {
       return mockPool.query(...args);

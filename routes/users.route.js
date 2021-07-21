@@ -1,6 +1,8 @@
 const express = require("express");
+const { route } = require("../app");
 const router = express.Router();
-const pool = require("./db");
+const pool = require("../db");
+const User = require("../models/user.model");
 
 router.get("/", async (req, res) => {
   try {
@@ -21,19 +23,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  try {
-    const { name } = req.body;
-
-    const user = await pool.query(
-      "INSERT INTO users (name) VALUES ($1) RETURNING *",
-      [name]
-    );
-
-    res.status(201).json(user.rows[0]);
-  } catch (err) {
-    res.status(500);
-  }
-});
+router.post("/signup", User.signup);
 
 module.exports = router;

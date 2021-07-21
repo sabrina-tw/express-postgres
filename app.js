@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.json());
 
-const usersRouter = require("./users.route");
+const usersRouter = require("./routes/users.route");
 app.use("/users", usersRouter);
 
 module.exports = app;
