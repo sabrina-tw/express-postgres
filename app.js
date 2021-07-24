@@ -8,6 +8,7 @@ app.get("/", async (req, res) => {
 
 app.use(express.json());
 
+// Knex demonstration
 const usersRouter = require("./routes/users.route");
 app.use("/users", usersRouter);
 
