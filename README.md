@@ -86,6 +86,8 @@ module.exports = router;
 
 ### [WIP] Authentication
 
+(can abandon if we go with Sequelize)
+
 From: https://gist.github.com/laurenfazah/f9343ae8577999d301334fc68179b485
 
 ```
@@ -174,3 +176,46 @@ describe("users", () => {
 ```
 
 `npm run test`
+
+# [WIP] Deployment
+
+**WIP: Works fine locally, but having this issue on [prod](https://express-postgres.netlify.app/):**
+
+```
+Access to XMLHttpRequest at 'https://express-postgres.herokuapp.com/users' from origin 'https://express-postgres.netlify.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
+
+- Frontend: https://express-postgres.netlify.app/
+- API: https://express-postgres.herokuapp.com/
+
+Steps taken:
+
+### Server
+
+- on Heroku web, create **Heroku** app and link to this repo
+- add 'heroku postgres' add on under free "hobby dev" tier
+- connect to heroku postgres using heroku CLI, create table and add dummy user
+- add buildpack `https://github.com/timanovsky/subdir-heroku-buildpack.git` and drag to top of list
+- add config var with `PROJECT_PATH` set to `.`
+- add CORS configuration with `ORIGIN_URL` set to netlify url (WITHOUT THE TRAILING `/`)
+
+### Client
+
+- on Netlify web, create **Netlify** app
+- under **continuous deployment** and build settings, link to this repo:
+  - base directory: client
+  - build command: npm run build
+  - publish directory: client/build
+- add `REACT_APP_API_URL` env var, set to heroku url (WITHOUT THE TRAILING `/`)
+
+### Testing locally
+
+If testing locally, be sure to add these env vars:
+
+client/.env
+
+- REACT_APP_API_URL=http://localhost:4000
+
+.env
+
+- ORIGIN_URL=http://localhost:3000
