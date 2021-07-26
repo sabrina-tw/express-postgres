@@ -185,6 +185,8 @@ describe("users", () => {
 Access to XMLHttpRequest at 'https://express-postgres.herokuapp.com/users' from origin 'https://express-postgres.netlify.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 ```
 
+**Also, check the heroku logs when trying to access https://express-postgres.herokuapp.com/users - you will see that the request times out.**
+
 - Frontend: https://express-postgres.netlify.app/
 - API: https://express-postgres.herokuapp.com/
 
@@ -198,6 +200,7 @@ Steps taken:
 - add buildpack `https://github.com/timanovsky/subdir-heroku-buildpack.git` and drag to top of list
 - add config var with `PROJECT_PATH` set to `.`
 - add CORS configuration with `ORIGIN_URL` set to netlify url (WITHOUT THE TRAILING `/`)
+- connection to db needs to take in `connectionString: process.env.DATABASE_URL`, DATABASE_URL being already populated in your Heroku config vars
 
 ### Client
 
