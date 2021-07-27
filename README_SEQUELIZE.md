@@ -35,11 +35,36 @@ GRANT connect ON DATABASE "devTraining2021" TO devtraining2021;
 REVOKE connect ON DATABASE "devTraining2021" FROM devtraining2021;
 ```
 
+## Exploration
+### Steps
+0. Complete pre-requisite, setup .env
+1. Run `npm start`, this will create the table "user" if it doesn't exist
+2. Insert a record into the table
+    ```
+    INSERT INTO "user"(
+      id, name, "firstName", "lastName", "createdAt", "updatedAt")
+      VALUES (1, 
+          'DISPLAY_NAME',
+          'FIRST_NAME', 
+          'LAST_NAME',
+          current_timestamp, 
+          current_timestamp);
+    ```
+3. Hit `http://localhost:4000/api/users`
+
 ## References
 1. Postgres
-- https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e
-- https://www.postgresql.org/docs/13/
-- https://www.postgresql.org/docs/13/sql-commands.html
-2. Sequelize
-- https://sequelize.org/master/manual/getting-started.html
-- [API reference](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-constructor-constructor)
+    - https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e
+    - https://www.postgresql.org/docs/13/
+    - https://www.postgresql.org/docs/13/sql-commands.html
+2. Sequelize 
+    - [API reference](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-constructor-constructor)
+    - https://sequelize.org/master/manual/getting-started.html
+
+## Tasks
+- [X] Testing the connection
+- [X] Create first model and assert end-to-end
+- [ ] Create first integration test
+- [ ] Run migration scripts via CLI
+- [ ] Add complexities to model , modelling one-to-many relationship
+- [ ] Eager loading + transactions

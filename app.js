@@ -3,6 +3,9 @@ require("dotenv").config();
 const sequelize = require("./sequelize");
 sequelize.connectDbThenMigrate(); // WIP: Migration
 
+// dependencies to get Sequelize models
+const { User } = require("./sequelize");
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -37,5 +40,10 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
+
+// WIP: Sequelize demonstration , to create router later
+app.get("/api/users", (req, res) => {
+  User.findAll().then(users => res.json(users));
+});
 
 module.exports = app;

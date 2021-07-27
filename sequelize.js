@@ -1,5 +1,8 @@
 const { Sequelize } = require('sequelize');
 
+// Dependencies to generate models and create DB tables
+const UserModel = require('./sequelize/models/user');
+
 const dbName = process.env.DB_NAME || "testDB";
 const dbUser = process.env.DB_USER || "user";
 const dbPass = process.env.DB_PASS;
@@ -34,10 +37,26 @@ const connectDbThenMigrate = async () => {
   }
 }
 
-const doMigration = () => {
-  // https://sequelize.org/master/manual/model-basics.html
+// Pass in Sequelize to resolve the same instance for DataTypes support
+const User = UserModel(sequelize, Sequelize);
+
+/*
+1. User.sync() : This creates the table if not exist (does nothing if exists)
+2. User.sync({ force: true }) : Creates the table, or drop it first if exist
+3. User.sync({ alter: true }) : Checks the current state of the table in the 
+   database and performs the necessary changes in the table.
+ */
+
+// See: https://sequelize.org/master/manual/model-basics.html#database-safety-check (to sync on certain tables using RegExp)
+// See: https://sequelize.org/master/manual/migrations.html for Production level
+const doMigration = async () => {
+  // await User.sync();
+  // console.log("The table for the User model was just (re)created!");
+  await sequelize.sync({ force: true });  // Not recommended for production-level software, potentially destructive
+  console.log("All models were synchronized successfully.");
 }
 
 module.exports = {
-  connectDbThenMigrate
+  connectDbThenMigrate,
+  User
 }
