@@ -12,10 +12,6 @@ app.use(
   })
 );
 
-app.get("/", async (req, res) => {
-  res.status(200).json({ test: "done" });
-});
-
 app.use(express.json());
 
 // Routes
