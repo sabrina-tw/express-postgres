@@ -179,37 +179,18 @@ describe("users", () => {
 
 # [WIP] Deployment
 
-**WIP: Works fine locally, but having this issue on [prod](https://express-postgres.netlify.app/):**
+App URL: https://express-postgres.herokuapp.com/
 
-```
-Access to XMLHttpRequest at 'https://express-postgres.herokuapp.com/users' from origin 'https://express-postgres.netlify.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-```
+**When trying to access https://express-postgres.herokuapp.com/api/users - you will see that the request times out**
 
-**Also, check the heroku logs when trying to access https://express-postgres.herokuapp.com/users - you will see that the request times out.**
-
-- Frontend: https://express-postgres.netlify.app/
-- API: https://express-postgres.herokuapp.com/
-
-Steps taken:
-
-### Server
+Steps taken to deploy:
 
 - on Heroku web, create **Heroku** app and link to this repo
 - add 'heroku postgres' add on under free "hobby dev" tier
 - connect to heroku postgres using heroku CLI, create table and add dummy user
-- add buildpack `https://github.com/timanovsky/subdir-heroku-buildpack.git` and drag to top of list
+- add buildpack `https://github.com/timanovsky/subdir-heroku-buildpack.git` and drag to top of list (not sure if strictly necessary)
 - add config var with `PROJECT_PATH` set to `.`
-- add CORS configuration with `ORIGIN_URL` set to netlify url (WITHOUT THE TRAILING `/`)
 - connection to db needs to take in `connectionString: process.env.DATABASE_URL`, DATABASE_URL being already populated in your Heroku config vars
-
-### Client
-
-- on Netlify web, create **Netlify** app
-- under **continuous deployment** and build settings, link to this repo:
-  - base directory: client
-  - build command: npm run build
-  - publish directory: client/build
-- add `REACT_APP_API_URL` env var, set to heroku url (WITHOUT THE TRAILING `/`)
 
 ### Testing locally
 
