@@ -19,7 +19,8 @@
     "express": "^4.17.1",
     "knex": "^0.21.19",
     "path": "^0.12.7",
-    "pg": "^8.6.0"
+    "pg": "^8.6.0",
+    "sequelize": "^6.6.5"
   },
   "devDependencies": {
     "eslint": "^7.30.0",

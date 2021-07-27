@@ -1,4 +1,8 @@
 require("dotenv").config();
+
+const sequelize = require("./sequelize");
+sequelize.connectDbThenMigrate(); // WIP: Migration
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -11,6 +15,10 @@ app.use(
     credentials: true,
   })
 );
+app.get("/", async (req, res) => {
+  console.log("Path / is hit");
+  res.status(200).json({ "test": "done" });
+});
 
 app.use(express.json());
 
