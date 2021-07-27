@@ -39,7 +39,7 @@ REVOKE connect ON DATABASE "devTraining2021" FROM devtraining2021;
 ### Steps
 0. Complete pre-requisite, setup .env
 1. Run `npm start`, this will create the table "user" if it doesn't exist
-2. Insert a record into the table
+2. Insert a record into the table. The script is found in `./sql/insert_user.sql`.
     ```
     INSERT INTO "user"(
       id, name, "firstName", "lastName", "createdAt", "updatedAt")
@@ -50,7 +50,7 @@ REVOKE connect ON DATABASE "devTraining2021" FROM devtraining2021;
           current_timestamp, 
           current_timestamp);
     ```
-3. Hit `http://localhost:4000/api/users`
+3. Hit `http://localhost:4000/sequelize/users`
 
 ## References
 1. Postgres

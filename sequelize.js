@@ -52,7 +52,8 @@ const User = UserModel(sequelize, Sequelize);
 const doMigration = async () => {
   // await User.sync();
   // console.log("The table for the User model was just (re)created!");
-  await sequelize.sync({ force: true });  // Not recommended for production-level software, potentially destructive
+  // await sequelize.sync({ force: true });  // Not recommended for production-level software, potentially destructive
+  sequelize.sync();
   console.log("All models were synchronized successfully.");
 }
 
