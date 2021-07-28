@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "start:dev": "nodemon index.js",
+    "knex:migrate": "DATABASE_URL=postgres://localhost:5432/devTraining2021 knex migrate:latest",
     "test": "jest",
     "heroku-postbuild": "npm install --prefix ./client && npm run build --prefix ./client"
   },

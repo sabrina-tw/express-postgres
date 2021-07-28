@@ -3,11 +3,12 @@
 ## Configuration
 .env
 ```
-DB_USER=devtraining2021
-DB_PASS=
-DB_NAME=devTraining2021
-DB_HOST=localhost
-DB_PORT=5432
+PG_HOST=localhost
+PG_PORT=5432
+
+DB_NAME_SEQUELIZE=devTraining2021
+DB_USER_SEQUELIZE=devtraining2021
+DB_PASS_SEQUELIZE=
 ```
 
 ### Pre-requisite: Setting up database and create database user

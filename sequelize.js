@@ -3,11 +3,11 @@ const { Sequelize } = require('sequelize');
 // Dependencies to generate models and create DB tables
 const UserModel = require('./sequelize/models/user');
 
-const dbName = process.env.DB_NAME || "testDB";
-const dbUser = process.env.DB_USER || "user";
-const dbPass = process.env.DB_PASS;
-const dbHost = process.env.DB_HOST || "localhost";
-const dbPort = process.env.DB_PORT || 5432;
+const dbName = process.env.DB_NAME_SEQUELIZE || "testDB";
+const dbUser = process.env.DB_USER_SEQUELIZE || "user";
+const dbPass = process.env.DB_PASS_SEQUELIZE;
+const dbHost = process.env.PG_HOST || "localhost";
+const dbPort = process.env.PG_PORT || 5432;
 
 // const sequelize = new Sequelize(`postgres://${dbUser}@${dbHost}:${dbPort}/${dbName}`);
 

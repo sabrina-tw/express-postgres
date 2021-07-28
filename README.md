@@ -22,6 +22,37 @@ npm i nodemon -D
 
 ## Configuration
 
+.env
+- for knex + sequelize
+- same DB host and port
+
+```
+PG_HOST=localhost
+PG_PORT=5432
+
+PG_DATABASE=xxx
+PG_USER=xxx
+PG_PASSWORD=xxx
+
+DB_NAME_SEQUELIZE=devTraining2021
+DB_USER_SEQUELIZE=devtraining2021
+DB_PASS_SEQUELIZE=
+```
+### [WIP] Test Your Setup
+
+`npm run knex:migrate`
+
+`npm run sequelize:migrate` - upcoming
+
+`npm start`
+
+To access knex backed apis, goto: http://localhost:4000/api/users
+
+To access sequelize backed apis, goto: http://localhost:4000/sequelize/users
+
+---
+
+## Configuration for KNEX
 db.js
 
 ```
@@ -38,17 +69,7 @@ const pool = new Pool({
 module.exports = pool;
 ```
 
-.env
-
-```
-DB_NAME=xxx
-DB_HOST=localhost
-DB_USER=xxx
-DB_PASS=xxx
-DB_PORT=5432
-```
-
-## Usage
+## Usage of KNEX
 
 users.route.js (implementing this in routes for simplicity - best to extract the actual querying into a users.controller.js)
 
@@ -84,6 +105,50 @@ module.exports = router;
 
 `npm start`
 
+### [WIP] Authentication
+
+(can abandon if we go with Sequelize)
+(probably similar for Sequelize, just changes in model I guess - TBC)
+
+From: https://gist.github.com/laurenfazah/f9343ae8577999d301334fc68179b485
+
+```
+npm i bcrypt knex
+npm i -g knex
+```
+
+```
+// knexfile.js
+exports.up = function (knex, Promise) {
+  let createQuery = `CREATE TABLE users(
+    id SERIAL PRIMARY KEY NOT NULL,
+    username TEXT,
+    token TEXT,
+    password_digest TEXT,
+    created_at TIMESTAMP
+  )`;
+  return knex.raw(createQuery);
+};
+
+exports.down = function (knex, Promise) {
+  let dropQuery = `DROP TABLE users`;
+  return knex.raw(dropQuery);
+};
+```
+
+Create migration file
+
+`knex migrate:make create-users-table`
+
+Migrate
+
+```
+knex migrate:latest
+```
+
+TODO: set up User model
+
+---
 # Testing
 
 ## Installation
@@ -135,6 +200,7 @@ describe("users", () => {
 
 `npm run test`
 
+---
 # [WIP] Deployment
 
 App URL: https://express-postgres.herokuapp.com/
