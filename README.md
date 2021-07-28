@@ -84,48 +84,6 @@ module.exports = router;
 
 `npm start`
 
-### [WIP] Authentication
-
-(can abandon if we go with Sequelize)
-
-From: https://gist.github.com/laurenfazah/f9343ae8577999d301334fc68179b485
-
-```
-npm i bcrypt knex
-npm i -g knex
-```
-
-```
-// knexfile.js
-exports.up = function (knex, Promise) {
-  let createQuery = `CREATE TABLE users(
-    id SERIAL PRIMARY KEY NOT NULL,
-    username TEXT,
-    token TEXT,
-    password_digest TEXT,
-    created_at TIMESTAMP
-  )`;
-  return knex.raw(createQuery);
-};
-
-exports.down = function (knex, Promise) {
-  let dropQuery = `DROP TABLE users`;
-  return knex.raw(dropQuery);
-};
-```
-
-Create migration file
-
-`knex migrate:make create-users-table`
-
-Migrate
-
-```
-knex migrate:latest
-```
-
-TODO: set up User model
-
 # Testing
 
 ## Installation
