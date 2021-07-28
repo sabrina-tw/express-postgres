@@ -148,14 +148,14 @@ Steps taken to deploy:
 - connect to heroku postgres using heroku CLI, create table and add dummy user
 - add buildpack `https://github.com/timanovsky/subdir-heroku-buildpack.git` and drag to top of list (not sure if strictly necessary)
 - add config var with `PROJECT_PATH` set to `.`
+- add config var with `REACT_APP_API_URL` set to `http://express-postgres.herokuapp.com` (WITHOUT trailing `/`)
 - connection to db needs to take in `connectionString: process.env.DATABASE_URL`, DATABASE_URL being already populated in your Heroku config vars
 
 ### Testing locally
 
-If testing locally, be sure to add these env vars:
+If testing locally, be sure to add these env vars in `client/.env`:
 
-client/.env
-
+- SKIP_PREFLIGHT_CHECK=true
 - REACT_APP_API_URL=http://localhost:4000
 
 .env
