@@ -158,6 +158,11 @@ If testing locally, be sure to add these env vars in `client/.env`:
 - SKIP_PREFLIGHT_CHECK=true
 - REACT_APP_API_URL=http://localhost:4000
 
-.env
+# TODO
 
-- ORIGIN_URL=http://localhost:3000
+- [] Lab: security-jwt ([mongoose version](https://thoughtworks-sea.github.io/developer-training/#/backend/security-jwt?id=lab-quick-start-security-jwt))
+- [] Lab: hashing passwords with bcrypt ([mongoose version](https://thoughtworks-sea.github.io/developer-training/#/backend/mongodb/mongoose-middleware))
+- [] Lab: express/postgres ([mongoose version](https://thoughtworks-sea.github.io/developer-training/#/backend/mongodb/express-mongoose-lab))
+- [] [Guide to deploy express/postgres app on Heroku](https://thoughtworks-sea.github.io/developer-training/#/backend/express-deploy-postgres) (WIP)
+- [] [Guide to deploy express/postgres/react app on Heroku](https://thoughtworks-sea.github.io/developer-training/#/delivering-software/deploying-full-stack) (WIP)
+- [] Hide pages on MongoDB from sidebar
