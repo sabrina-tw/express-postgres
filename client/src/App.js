@@ -1,25 +1,18 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Users from "./components/users";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import UsersDummy from "./components/UsersDummy";
+import UsersApi from "./components/UsersApi";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Users />
-      </header>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/users-dummy" component={UsersDummy}></Route>
+          <Route path="/users" component={UsersApi}></Route>
+          <Route path="/" render={() => <div>Page not found</div>}></Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
