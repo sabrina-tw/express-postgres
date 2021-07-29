@@ -1,3 +1,12 @@
+# TODO
+
+- [ ] Lab: security-jwt ([mongoose version](https://thoughtworks-sea.github.io/developer-training/#/backend/security-jwt?id=lab-quick-start-security-jwt))
+- [ ] Lab: hashing passwords with bcrypt ([mongoose version](https://thoughtworks-sea.github.io/developer-training/#/backend/mongodb/mongoose-middleware))
+- [ ] Lab: express/postgres ([mongoose version](https://thoughtworks-sea.github.io/developer-training/#/backend/mongodb/express-mongoose-lab))
+- [ ] [Guide to deploy express/postgres app on Heroku](https://thoughtworks-sea.github.io/developer-training/#/backend/express-deploy-postgres) (WIP)
+- [ ] [Guide to deploy express/postgres/react app on Heroku](https://thoughtworks-sea.github.io/developer-training/#/delivering-software/deploying-full-stack) (WIP)
+- [ ] Hide pages on MongoDB from sidebar
+
 # express-postgres
 
 Playground to set up Postgres in Express.
@@ -23,6 +32,7 @@ npm i nodemon -D
 ## Configuration
 
 .env
+
 - for knex + sequelize
 - same DB host and port
 
@@ -38,6 +48,7 @@ DB_NAME_SEQUELIZE=devTraining2021
 DB_USER_SEQUELIZE=devtraining2021
 DB_PASS_SEQUELIZE=
 ```
+
 ### [WIP] Test Your Setup
 
 `npm run knex:migrate`
@@ -53,6 +64,7 @@ To access sequelize backed apis, goto: http://localhost:4000/sequelize/users
 ---
 
 ## Configuration for KNEX
+
 db.js
 
 ```
@@ -149,6 +161,7 @@ knex migrate:latest
 TODO: set up User model
 
 ---
+
 # Testing
 
 ## Installation
@@ -201,6 +214,7 @@ describe("users", () => {
 `npm run test`
 
 ---
+
 # [WIP] Deployment
 
 App URL: https://express-postgres.herokuapp.com/
@@ -224,11 +238,22 @@ If testing locally, be sure to add these env vars in `client/.env`:
 - SKIP_PREFLIGHT_CHECK=true
 - REACT_APP_API_URL=http://localhost:4000
 
-# TODO
+# Troubleshooting
 
-- [] Lab: security-jwt ([mongoose version](https://thoughtworks-sea.github.io/developer-training/#/backend/security-jwt?id=lab-quick-start-security-jwt))
-- [] Lab: hashing passwords with bcrypt ([mongoose version](https://thoughtworks-sea.github.io/developer-training/#/backend/mongodb/mongoose-middleware))
-- [] Lab: express/postgres ([mongoose version](https://thoughtworks-sea.github.io/developer-training/#/backend/mongodb/express-mongoose-lab))
-- [] [Guide to deploy express/postgres app on Heroku](https://thoughtworks-sea.github.io/developer-training/#/backend/express-deploy-postgres) (WIP)
-- [] [Guide to deploy express/postgres/react app on Heroku](https://thoughtworks-sea.github.io/developer-training/#/delivering-software/deploying-full-stack) (WIP)
-- [] Hide pages on MongoDB from sidebar
+## React tests not running
+
+If your run into this error running React tests on your project:
+
+![react test not running](react-jest.png)
+
+Install these packages:
+
+```
+npm i -D @babel/plugin-syntax-jsx @babel/plugin-transform-runtime @babel/preset-env @babel/preset-react jest-transform-css
+```
+
+You will also need to configure babel and jest. Refer to this commit: https://github.com/sabrina-tw/express-postgres/commit/d1b571bbcf7a78ed511d19cee4d07b4a21468b25
+
+References:
+
+- https://github.com/testing-library/react-testing-library/issues/422
