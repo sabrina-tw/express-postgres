@@ -77,8 +77,19 @@ REVOKE connect ON DATABASE "devTraining2021" FROM devtraining2021;
     ```
 
 3. Convert `config.js` (for sequelize-cli to take in env var) and update with correct values.
-  - dialect
-  - port
+    - dialect
+    - port
+
+4. Run the following to generate first model and migrate
+    ```
+    npm run sequelize -- model:generate \
+      --name User2 \
+      --attributes name:string,firstName:string,lastName:string,email:string
+
+    npm run sequelize -- db:migrate
+    ```
+
+5. Run the following to seed the Database ?
 
 ## References
 1. Postgres
