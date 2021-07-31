@@ -51,7 +51,13 @@ DB_PASS_SEQUELIZE=
 
 ### [WIP] Test Your Setup
 
+`npm run knex -- --help`
+
+`npm run knex -- migrate:status`
+
 `npm run knex:migrate`
+
+`npm run sequelize -- --help`
 
 `npm run sequelize:migrate` - upcoming
 

@@ -22,6 +22,8 @@ Ref: https://github.com/thoughtworks-jumpstart/jumpstart/blob/master/back-end-we
   * Lock
 
   ### Data Modelling (Schema?)
+  - Ref: https://github.com/thoughtworks-jumpstart/jumpstart/blob/master/back-end-web-development/introduction_to_relational_database.md#database-modeling
+
   - **Primary Key**
   - **Entity Integrity Rule** 
     https://github.com/thoughtworks-jumpstart/jumpstart/blob/master/back-end-web-development/introduction_to_relational_database.md#integrity-rules-for-database-modelling-and-design
