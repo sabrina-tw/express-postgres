@@ -47,6 +47,8 @@ PG_PASSWORD=xxx
 DB_NAME_SEQUELIZE=devTraining2021
 DB_USER_SEQUELIZE=devtraining2021
 DB_PASS_SEQUELIZE=
+
+DB_DIALECT_SEQUELIZE=postgres 
 ```
 
 ### [WIP] Test Your Setup

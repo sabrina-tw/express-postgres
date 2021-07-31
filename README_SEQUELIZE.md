@@ -53,6 +53,33 @@ REVOKE connect ON DATABASE "devTraining2021" FROM devtraining2021;
     ```
 3. Hit `http://localhost:4000/sequelize/users`
 
+## (WIP) Migrations
+0. Install `sequelize-cli` and add convenient script "sequelize".
+    ```
+    npm i --save-dev sequelize-cli
+    ```
+
+1. Set up `.sequelizerc` in the root path. The config file is defaulted to json, and we have to set up the configuration for `sequelize-cli` to accept [dynamic configuration](https://sequelize.org/master/manual/migrations.html#dynamic-configuration).
+    ```
+    const path = require('path');
+
+    module.exports = {
+      'config': path.resolve('sequelize/db', 'config.js'),
+      'models-path': path.resolve('sequelize/db', 'models'),
+      'seeders-path': path.resolve('sequelize/db', 'seeders'),
+      'migrations-path': path.resolve('sequelize/db', 'migrations')
+    }
+    ```
+
+2. Run the following to generate bootstrapping folders for sequelize migration.
+    ```
+    npm run sequelize -- init
+    ```
+
+3. Convert `config.js` (for sequelize-cli to take in env var) and update with correct values.
+  - dialect
+  - port
+
 ## References
 1. Postgres
     - https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e

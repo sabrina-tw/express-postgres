@@ -3,6 +3,7 @@ const { Sequelize } = require('sequelize');
 // Dependencies to generate models and create DB tables
 const UserModel = require('./sequelize/models/user');
 
+const dbDialect = process.env.DB_DIALECT_SEQUELIZE || "postgres";
 const dbName = process.env.DB_NAME_SEQUELIZE || "testDB";
 const dbUser = process.env.DB_USER_SEQUELIZE || "user";
 const dbPass = process.env.DB_PASS_SEQUELIZE;
@@ -14,7 +15,7 @@ const dbPort = process.env.PG_PORT || 5432;
 const sequelize = new Sequelize(dbName, dbUser, dbPass, {
   host: dbHost,
   port: dbPort,
-  dialect: 'postgres',
+  dialect: dbDialect,
   // logging: console.log,                  // Default, displays the first parameter of the log function call
   // logging: (...msg) => console.log(msg), // Displays all log function call parameters
   // logging: false,                        // Disables logging
