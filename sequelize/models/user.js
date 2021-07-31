@@ -23,18 +23,18 @@ options = {
   // tableName: 'Users'   // Simply tell the table name
 }
 
-module.exports = (sequelize, type) => sequelize.define(modelName, {
+module.exports = (sequelize, Sequelize) => sequelize.define(modelName, {
   id: {
-    type: type.INTEGER,
+    type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  name: type.STRING,
+  name: Sequelize.STRING,
   firstName: {
-    type: type.STRING,
+    type: Sequelize.STRING,
     allowNull: false // allowNull defaults to true
   },
   lastName: {
-    type: type.STRING
+    type: Sequelize.STRING
   }
 }, options);

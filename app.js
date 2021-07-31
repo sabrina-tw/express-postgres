@@ -3,7 +3,7 @@ require("dotenv").config();
 // DB interactions
 
 const sequelize = require("./sequelize");
-sequelize.connectDbThenMigrate(); // WIP: Migration
+sequelize.connectDb();
 
 const sequelizeRouter = require("./sequelize/routers/sequelize.route");
 
@@ -11,7 +11,6 @@ const sequelizeRouter = require("./sequelize/routers/sequelize.route");
 
 const express = require("express");
 const app = express();
-const path = require("path");
 
 app.get("/", async (req, res) => {
   console.log("Path / is hit");
