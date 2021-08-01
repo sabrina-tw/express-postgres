@@ -11,6 +11,7 @@ const sequelizeRouter = require("./sequelize/routers/sequelize.route");
 
 const express = require("express");
 const app = express();
+const path = require("path");
 
 app.get("/", async (req, res) => {
   console.log("Path / is hit");

@@ -104,6 +104,6 @@ REVOKE connect ON DATABASE "devTraining2021" FROM devtraining2021;
 - [X] Testing the connection
 - [X] Create first model and assert end-to-end
 - [ ] Create first integration test
-- [ ] Run migration scripts via CLI
+- [X] Run migration scripts via CLI
 - [ ] Add complexities to model , modelling one-to-many relationship
 - [ ] Eager loading + transactions
