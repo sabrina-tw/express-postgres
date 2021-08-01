@@ -5,7 +5,13 @@
 - [ ] Lab: express/postgres ([mongoose version](https://thoughtworks-sea.github.io/developer-training/#/backend/mongodb/express-mongoose-lab))
 - [ ] [Guide to deploy express/postgres app on Heroku](https://thoughtworks-sea.github.io/developer-training/#/backend/express-deploy-postgres) (WIP)
 - [ ] [Guide to deploy express/postgres/react app on Heroku](https://thoughtworks-sea.github.io/developer-training/#/delivering-software/deploying-full-stack) (WIP)
-- [ ] Hide pages on MongoDB from sidebar
+- [X] Hide pages on MongoDB from sidebar
+- [..] Update Sequelize basics Notes
+- [ ] Create basic "Sequelize CRUD", combine "Sequelize Virtuals"?
+- [ ] Update Postgres Testing
+- [ ] Create "Sequelize Validation"
+- [ ] combine "Sequelize Virtuals" and Assocications ? Remove associations from Sequelize basics ?
+- [ ] Finish off Postgres Basics Notes , extract from links in RDBMS_CONCEPTS
 
 # express-postgres
 
