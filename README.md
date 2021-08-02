@@ -261,3 +261,83 @@ You will also need to configure babel and jest. Refer to this commit: https://gi
 References:
 
 - https://github.com/testing-library/react-testing-library/issues/422
+
+# SSL connection to the Postgres DB
+
+It is recommended to require SSL connection on NodeJS clients.
+See: https://devcenter.heroku.com/articles/heroku-postgresql#heroku-postgres-ssl
+
+The code has been configured to support SSL connection from clients, however this requires the Postgres DB to be configured with self-signed cert. Thus a conditional based on environment variable `PG_SSL_MODE` was added to toggle the SSL connection in `db/index.js` (knex) and `sequelize.js` (sequelize).
+
+    ```sh
+      # .env
+      PG_SSL_MODE=false
+    ```
+
+*To set up postgres with Self-Signed Cert in Dev env*
+
+References:
+- https://kb.objectrocket.com/postgresql/configure-a-postgresql-server-1273
+- https://www.postgresql.org/docs/13/runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-SSL
+
+Steps:
+1. Locate the `postgresql.conf` on the dev machine. For MacOS, usually it's in `/usr/local/var/postgres`.
+
+2. Navigate to the postgres config folder and backup the file `postgresql.conf`.
+    ```sh
+      cd /usr/local/var/postgres
+      cp postgresql.conf postgresql.conf.backup
+    ```
+
+3. Create self-signed cert. Suggest to create a folder `ssl` to store the configuration.
+    - We are creating a non-expiring cert and with the default configuration of openssl.
+    - Note that you might required to use a PEM passphrase for the private key. *Please remember this passphrase as you will need it to update `postgresql.conf` later*.
+
+    ```sh
+    mkdir ssl && cd ssl
+
+    # Create Private Key and Certificate Signing Request (CSR)
+    openssl req -newkey rsa:2048 -keyout server.key -out server.csr
+
+    # Sign the CSR to generate a self-signed certificate
+    openssl req -x509 -in server.csr -text -key server.key -out server.crt
+    ```
+
+4. Update `postgresql.conf` to enable ssl configuration.
+    ```
+      # - SSL -
+
+      ssl = on
+      #ssl_ca_file = ''
+      ssl_cert_file = 'ssl/server.crt'
+      #ssl_crl_file = ''
+      ssl_key_file = 'ssl/server.key'
+      #ssl_ciphers = 'HIGH:MEDIUM:+3DES:!aNULL' # allowed SSL ciphers
+      #ssl_prefer_server_ciphers = on
+      #ssl_ecdh_curve = 'prime256v1'
+      #ssl_min_protocol_version = 'TLSv1.2'
+      #ssl_max_protocol_version = ''
+      #ssl_dh_params_file = ''
+      ssl_passphrase_command = 'echo "<YOUR_PASSPHRASE>"'
+      ssl_passphrase_command_supports_reload = on
+    ```
+
+5. Run the following to restart Postgres services. The commands are for installation via Homebrew on Mac, please refer to first reference if you are not on this setup.
+
+    ```sh
+      # get the status of brew services, note on postgresql service.
+      brew services
+
+      # restart the postgresql service
+      brew services restart postgresql
+
+      # check the status again to confirm the configuration is fine
+      brew services
+    ```
+
+6. Test your app.
+
+    Remove this settings from .env
+    ```
+      PG_SSL_MODE=false
+    ```

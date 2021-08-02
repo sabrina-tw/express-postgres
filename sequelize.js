@@ -1,5 +1,7 @@
 const { Sequelize } = require('sequelize');
 
+const dbConnectViaSsl = process.env.PG_SSL_MODE !== "false";
+
 const dbDialect = process.env.DB_DIALECT_SEQUELIZE || "postgres";
 const dbName = process.env.DB_NAME_SEQUELIZE || "testDB";
 const dbUser = process.env.DB_USER_SEQUELIZE || "user";
@@ -8,6 +10,16 @@ const dbHost = process.env.PG_HOST || "localhost";
 const dbPort = process.env.PG_PORT || 5432;
 
 // const sequelize = new Sequelize(`postgres://${dbUser}@${dbHost}:${dbPort}/${dbName}`);
+
+const dbDialectOptions = dbConnectViaSsl ? {
+  // SSL connection
+  // https://github.com/sequelize/sequelize/issues/10015
+  // https://stackoverflow.com/questions/58965011/sequelizeconnectionerror-self-signed-certificat
+  ssl: {
+    require: dbConnectViaSsl,
+    rejectUnauthorized: false
+  }
+} : {};
 
 const sequelize = new Sequelize(dbName, dbUser, dbPass, {
   host: dbHost,
@@ -23,6 +35,7 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
   //   acquire: 30000, // default: 60000ms
   //   evict: 1000     // default: 1000ms
   // },
+  dialectOptions: dbDialectOptions
 });
 
 const connectDb = async () => {
