@@ -35,6 +35,6 @@ app.get("*", (req, res) =>
 );
 
 // Sequelize demonstration
-app.use("/sequelize", sequelizeRouter);
+apiRouter.use("/sequelize", sequelizeRouter);
 
 module.exports = app;
