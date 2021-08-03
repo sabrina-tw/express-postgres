@@ -3,14 +3,11 @@
 
 import Sequelize from 'sequelize';
 
-const dbConnectViaSsl = process.env.PG_SSL_MODE !== "false";
+const devDbConnString = `postgresql://${process.env.DB_USER_SEQUELIZE}:${process.env.DB_PASS_SEQUELIZE}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.DB_NAME_SEQUELIZE}`;
+const dbConnString = process.env.DATABASE_URL || devDbConnString; // for heroku
 
 const dbDialect = process.env.DB_DIALECT_SEQUELIZE || "postgres";
-const dbName = process.env.DB_NAME_SEQUELIZE || "testDB";
-const dbUser = process.env.DB_USER_SEQUELIZE || "user";
-const dbPass = process.env.DB_PASS_SEQUELIZE;
-const dbHost = process.env.PG_HOST || "localhost";
-const dbPort = process.env.PG_PORT || 5432;
+const dbConnectViaSsl = process.env.PG_SSL_MODE !== "false";
 
 // const sequelize = new Sequelize(`postgres://${dbUser}@${dbHost}:${dbPort}/${dbName}`);
 
@@ -24,10 +21,9 @@ const dbDialectOptions = dbConnectViaSsl ? {
   }
 } : {};
 
-const sequelize = new Sequelize(dbName, dbUser, dbPass, {
-  host: dbHost,
-  port: dbPort,
+const sequelize = new Sequelize(dbConnString, {
   dialect: dbDialect,
+  dialectOptions: dbDialectOptions,
   // logging: console.log,                  // Default, displays the first parameter of the log function call
   // logging: (...msg) => console.log(msg), // Displays all log function call parameters
   // logging: false,                        // Disables logging
@@ -37,8 +33,7 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
   //   idle: 10000,    // default: 10000ms
   //   acquire: 30000, // default: 60000ms
   //   evict: 1000     // default: 1000ms
-  // },
-  dialectOptions: dbDialectOptions
+  // }
 });
 
 // -----------------------------------------------------
