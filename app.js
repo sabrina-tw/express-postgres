@@ -29,7 +29,7 @@ const __dirname = import.meta.url;
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.get("*", (req, res) =>
-  res.sendFile(path.join("client", "build", "index.html"), { root: __dirname })
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"))
 );
 
 
