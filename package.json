@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "dotenv node index.js",
+    "start": "node index.js",
     "start:dev": "dotenv nodemon index.js",
     "knex": "knex",
     "knex:migrate": "DATABASE_URL=postgres://localhost:5432/devTraining2021 knex migrate:latest",
