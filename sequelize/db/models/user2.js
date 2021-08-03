@@ -1,3 +1,8 @@
+/*
+This file is generated via sequelize-cli model:generate command.
+It comes with the migration script.
+ */
+
 'use strict';
 
 const { Model } = require('sequelize');

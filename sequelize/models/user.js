@@ -1,4 +1,10 @@
 /*
+This file is generated manually. The migration script was later created
+from sequelize-cli migration:generate command, and updated manually.
+See: https://sequelize.org/master/manual/migrations.html#migration-skeleton
+*/
+
+/*
 
 In both ways, sequelize.define will call Model.init
 See: https://sequelize.org/master/class/lib/model.js~Model.html#static-method-init

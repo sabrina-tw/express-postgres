@@ -86,10 +86,10 @@ REVOKE connect ON DATABASE "devTraining2021" FROM devtraining2021;
       --name User2 \
       --attributes name:string,firstName:string,lastName:string,email:string
 
-    npm run sequelize -- db:migrate
+    npm run sequelize -- db:migrate --env <ENV_IN_CONFIG_JS>
     ```
 
-5. Run the following to seed the Database ?
+6. Run the following to seed the Database ?
 
 ## References
 1. Postgres

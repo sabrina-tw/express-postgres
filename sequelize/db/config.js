@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 const dbDialect = process.env.DB_DIALECT_SEQUELIZE || "postgres";
 
 const dbUser = process.env.DB_USER_SEQUELIZE || "user";
@@ -25,12 +23,4 @@ module.exports =
     "port": dbPort,
     "dialect": dbDialect
   },
-  "production": {
-    "username": dbUser,
-    "password": dbPass,
-    "database": process.env.DB_NAME_SEQUELIZE,
-    "host": dbHost,
-    "port": dbPort,
-    "dialect": dbDialect
-  }
 }
