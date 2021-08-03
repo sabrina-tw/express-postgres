@@ -1,12 +1,5 @@
 require("dotenv").config();
 
-// DB interactions
-
-const sequelize = require("./sequelize");
-sequelize.connectDb();
-
-const sequelizeRouter = require("./sequelize/routers/sequelize.route");
-
 // START OF APP REQ
 
 const express = require("express");
@@ -35,6 +28,11 @@ app.get("*", (req, res) =>
 );
 
 // Sequelize demonstration
+
+const sequelize = require("./sequelize");
+sequelize.connectDb();
+
+const sequelizeRouter = require("./sequelize/routers/sequelize.route");
 apiRouter.use("/sequelize", sequelizeRouter);
 
 module.exports = app;
