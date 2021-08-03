@@ -1,11 +1,10 @@
-const express = require("express");
+import { Router } from 'express';
+import handleError from '../../utils/error-handlers.js';
 
-const router = express.Router();
-
-const handleError = require('../../utils/error-handlers');
+const router = Router();
 
 // dependencies to get Sequelize models
-const { User } = require("../../sequelize");
+import { User } from '../../sequelize.js';
 
 router.get("/users", async (req, res, next) => {
   try {
@@ -18,4 +17,4 @@ router.get("/users", async (req, res, next) => {
 
 router.use(handleError);
 
-module.exports = router;
+export default router;

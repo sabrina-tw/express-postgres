@@ -1,4 +1,7 @@
-const { Sequelize } = require('sequelize');
+// not sure if this is relevant
+// ES6: https://github.com/babel/example-node-server
+
+import Sequelize from 'sequelize';
 
 const dbConnectViaSsl = process.env.PG_SSL_MODE !== "false";
 
@@ -38,14 +41,9 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
   dialectOptions: dbDialectOptions
 });
 
-const connectDb = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-}
+// -----------------------------------------------------
+// ------------ LEGACY FOR REFERNCE --------------------
+// -----------------------------------------------------
 
 // This function shouldn't be used as part of app lifecycle (especially in Prod), as migration is potentially destructive
 // See: https://sequelize.org/master/manual/model-basics.html#database-safety-check (to sync on certain tables using RegExp)
@@ -76,14 +74,23 @@ const doMigration = async () => {
   console.log("All models were synchronized successfully.");
 }
 
+// -----------------------------------------------------
+// ------------------ ACTUAL IN USE --------------------
+// -----------------------------------------------------
+
+export const connectDb = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+}
+
+// TODO: Review if we should remove the below from this file
+
 // Dependencies to generate models and create DB tables
-const UserModel = require('./sequelize/models/user');
+import UserModel from './sequelize/models/user.js';
 
 // Pass in Sequelize to resolve the same instance for DataTypes support
-const User = UserModel(sequelize, Sequelize);
-
-module.exports = {
-  connectDb,
-  connectDbThenMigrate,
-  User
-}
+export const User = UserModel(sequelize, Sequelize);

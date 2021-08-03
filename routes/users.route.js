@@ -1,7 +1,8 @@
-const express = require("express");
+import express from 'express';
 const router = express.Router();
-const pool = require("../db");
-const User = require("../models/user.model");
+
+import pool from '../db/index.js';
+import User from '../models/user.model.js';
 
 router.get("/", async (req, res) => {
   try {
@@ -24,4 +25,4 @@ router.get("/:id", async (req, res) => {
 
 router.post("/signup", User.signup);
 
-module.exports = router;
+export default router;

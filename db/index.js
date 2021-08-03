@@ -1,4 +1,5 @@
-const { Pool } = require("pg");
+import pg from 'pg';
+const { Pool } = pg;
 
 const connectionString = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
 
@@ -14,4 +15,4 @@ if (process.env.PG_SSL_MODE !== "false") {
 
 const pool = new Pool(poolOptions);
 
-module.exports = pool;
+export default pool;

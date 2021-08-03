@@ -18,12 +18,12 @@ const modelName = "user";
 The optional options to be passed to Model.init(), which is then used by Sequelize 
 to configure the table naming etc.
  */
-options = {
+const options = {
   freezeTableName: true,  // Use the same name as modelName for the table, instead of pluralize it
   // tableName: 'Users'   // Simply tell the table name
 }
 
-module.exports = (sequelize, Sequelize) => sequelize.define(modelName, {
+export default (sequelize, Sequelize) => sequelize.define(modelName, {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,

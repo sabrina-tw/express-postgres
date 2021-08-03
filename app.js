@@ -1,10 +1,9 @@
-require("dotenv").config();
+import dotenv from 'dotenv';
+dotenv.config();
 
-// START OF APP REQ
+import express from 'express';
 
-const express = require("express");
 const app = express();
-const path = require("path");
 
 app.get("/", async (req, res) => {
   console.log("Path / is hit");
@@ -14,25 +13,32 @@ app.get("/", async (req, res) => {
 app.use(express.json());
 
 // Routes
+import usersRouter from './routes/users.route.js';
+
 const apiRouter = express.Router();
 app.use("/api", apiRouter);
 
-const usersRouter = require("./routes/users.route"); // Knex demonstration
+/// Knex demonstration
 apiRouter.use("/users", usersRouter);
 
 // To allow us to deploy both front and backend on Heroku, instead of backend to Heroku and frontend to Netlify
+// ES6 instead of CommonJS: https://nodejs.org/api/esm.html#esm_no_filename_or_dirname
+import path from 'path';
+const __dirname = import.meta.url;
+
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "client", "build", "index.html"))
 );
 
+
 // Sequelize demonstration
+import { connectDb } from './sequelize.js';
+import sequelizeRouter from './sequelize/routers/sequelize.route.js';
 
-const sequelize = require("./sequelize");
-sequelize.connectDb();
-
-const sequelizeRouter = require("./sequelize/routers/sequelize.route");
+connectDb();
 apiRouter.use("/sequelize", sequelizeRouter);
 
-module.exports = app;
+
+export default app;
