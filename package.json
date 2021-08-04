@@ -10,10 +10,10 @@
     "knex": "knex",
     "knex:migrate": "DATABASE_URL=postgres://localhost:5432/devTraining2021 knex migrate:latest",
     "sequelize": "dotenv -- sequelize-cli",
-    "sequelize:migrate": "npx sequelize-cli db:migrate --url $DATABASE_URL --env production",
+    "sequelize:migrate": "npx install babel-register && npx sequelize-cli db:migrate --url $DATABASE_URL --env production",
     "sequelize:migrate:dev": "npm run sequelize -- db:migrate",
     "test": "jest",
-    "heroku-prebuild": "npm install && npm run sequelize:migrate",
+    "heroku-prebuild": "npm run sequelize:migrate",
     "heroku-postbuild": "npm install --prefix ./client && npm run build --prefix ./client"
   },
   "keywords": [],
