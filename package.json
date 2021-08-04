@@ -13,7 +13,7 @@
     "sequelize:migrate": "npx sequelize-cli db:migrate --url $DATABASE_URL --env production",
     "sequelize:migrate:dev": "npm run sequelize -- db:migrate",
     "test": "jest",
-    "heroku-prebuild": "npm run sequelize:migrate",
+    "heroku-prebuild": "npm install && npm run sequelize:migrate",
     "heroku-postbuild": "npm install --prefix ./client && npm run build --prefix ./client"
   },
   "keywords": [],
