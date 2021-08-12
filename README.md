@@ -42,7 +42,21 @@ npm i nodemon -D
 - for knex + sequelize
 - same DB host and port
 
-```
+```sh
+DB_DIALECT_SEQUELIZE=postgres
+
+# For local only, when Postgres didn't support SSL.
+# SSL is recommended for DB server in Production.
+PG_SSL_MODE=false
+
+# Use this variable to avoid connection issue with knex and sequelize.
+# The same connection string will be used in both knex and sequelize,
+# so be careful of the table naming.
+# This variable will ignore the separate variables for DB connection.
+DATABASE_URL=postgresql://<DB_USER>:<DB_PASS>@localhost:5432/<DATABASE_NAME>
+
+# To use separate db for knex and sequelize, use the following parameters.
+# You will need to make sure DATABASE_URL is NOT DEFINDED from .env
 PG_HOST=localhost
 PG_PORT=5432
 
@@ -53,8 +67,6 @@ PG_PASSWORD=xxx
 DB_NAME_SEQUELIZE=devTraining2021
 DB_USER_SEQUELIZE=devtraining2021
 DB_PASS_SEQUELIZE=
-
-DB_DIALECT_SEQUELIZE=postgres 
 ```
 
 ### [WIP] Test Your Setup

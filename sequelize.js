@@ -3,6 +3,8 @@
 
 import Sequelize from 'sequelize';
 
+import { SequelizeDatabaseConnectionError } from './utils/error.js';
+
 const devDbConnString = `postgresql://${process.env.DB_USER_SEQUELIZE}:${process.env.DB_PASS_SEQUELIZE}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.DB_NAME_SEQUELIZE}`;
 const dbConnString = process.env.DATABASE_URL || devDbConnString; // for heroku
 
@@ -77,8 +79,9 @@ export const connectDb = async () => {
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
+  } catch (err) {
+    const error = new SequelizeDatabaseConnectionError(`Unable to connect to the database through dbConnString: ${dbConnString}`, err);
+    console.error(error);
   }
 }
 
