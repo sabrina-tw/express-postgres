@@ -6,11 +6,11 @@
 - [ ] [Guide to deploy express/postgres app on Heroku](https://thoughtworks-sea.github.io/developer-training/#/backend/express-deploy-postgres) (WIP)
 - [ ] [Guide to deploy express/postgres/react app on Heroku](https://thoughtworks-sea.github.io/developer-training/#/delivering-software/deploying-full-stack) (WIP)
 - [X] Hide pages on MongoDB from sidebar
-- [..] Update Sequelize basics Notes, combine with "Sequelize Virtuals".
-- [..] Create basic "Sequelize CRUD"
-- [..] Update Postgres Testing - Mock done, `Pg-Mem` with SQL?
+- [X] Update Sequelize basics Notes, combine with "Sequelize Virtuals".
+- [X] Create basic "Sequelize CRUD"
+- [X] Update Postgres Testing, `Pg-Mem` with SQL (out of scope)
 - [ ] Update "Sequelize Assocications ? Remove associations from Sequelize basics ?
-- [ ] Finish off Postgres Basics Notes , extract from links in RDBMS_CONCEPTS
+- [X] Finish off Postgres Basics Notes , extract from links in RDBMS_CONCEPTS
 
 # express-postgres
 
